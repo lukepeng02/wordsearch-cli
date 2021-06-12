@@ -5,7 +5,10 @@ import time
 from pyfiglet import Figlet
 from plumbum import cli
 import questionary
+import nltk
 from nltk.corpus import words
+nltk.download('words') # Delete me after first time running
+
 
 def delete_last_line():
     """Delete the last line"""
