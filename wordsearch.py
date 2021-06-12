@@ -67,39 +67,6 @@ def check_found_word(word):
 
 def create_letter_list_2d(board_size: int, random_words):
     """Create the 2d list of letters to "paste" onto board"""
-    def generate_start_north(word):
-        start_row = random.randrange(len(word) - 1, board_size)
-        start_col = random.randrange(board_size)
-        return f'{start_row} {start_col}'
-    def generate_start_northeast(word):
-        start_row = random.randrange(len(word) - 1, board_size)
-        start_col = random.randrange(board_size - len(word) + 1)
-        return f'{start_row} {start_col}'
-    def generate_start_east(word):
-        start_row = random.randrange(board_size)
-        start_col = random.randrange(board_size - len(word) + 1)
-        return f'{start_row} {start_col}'
-    def generate_start_southeast(word):
-        start_row = random.randrange(board_size - len(word) + 1)
-        start_col = random.randrange(board_size - len(word) + 1)
-        return f'{start_row} {start_col}'
-    def generate_start_south(word):
-        start_row = random.randrange(board_size - len(word) + 1)
-        start_col = random.randrange(board_size)
-        return f'{start_row} {start_col}'
-    def generate_start_southwest(word):
-        start_row = random.randrange(board_size - len(word) + 1)
-        start_col = random.randrange(len(word) - 1, board_size)
-        return f'{start_row} {start_col}'
-    def generate_start_west(word):
-        start_row = random.randrange(board_size)
-        start_col = random.randrange(len(word) - 1, board_size)
-        return f'{start_row} {start_col}'
-    def generate_start_northwest(word):
-        start_row = random.randrange(len(word) - 1, board_size)
-        start_col = random.randrange(len(word) - 1, board_size)
-        return f'{start_row} {start_col}'
-
     def find_space(word, start_row, start_col, direction):
         del_row = int(DIRECTIONS[direction].split()[0])
         del_col = int(DIRECTIONS[direction].split()[1])
@@ -135,32 +102,43 @@ def create_letter_list_2d(board_size: int, random_words):
         while not success:
             direction = random.randrange(8)
             start_coords = ""
+            start_row = ""
+            start_col = ""
 
             # N
             if direction == 0:
-                start_coords = generate_start_north(word)
+                start_row = random.randrange(len(word) - 1, board_size)
+                start_col = random.randrange(board_size)
             # NE
             elif direction == 1:
-                start_coords = generate_start_northeast(word)
+                start_row = random.randrange(len(word) - 1, board_size)
+                start_col = random.randrange(board_size - len(word) + 1)
             # E
             elif direction == 2:
-                start_coords = generate_start_east(word)
+                start_row = random.randrange(board_size)
+                start_col = random.randrange(board_size - len(word) + 1)
             # SE
             elif direction == 3:
-                start_coords = generate_start_southeast(word)
+                start_row = random.randrange(board_size - len(word) + 1)
+                start_col = random.randrange(board_size - len(word) + 1)
             # S
             elif direction == 4:
-                start_coords = generate_start_south(word)
+                start_row = random.randrange(board_size - len(word) + 1)
+                start_col = random.randrange(board_size)
             # SW
             elif direction == 5:
-                start_coords = generate_start_southwest(word)
+                start_row = random.randrange(board_size - len(word) + 1)
+                start_col = random.randrange(len(word) - 1, board_size)
             # W
             elif direction == 6:
-                start_coords = generate_start_west(word)
+                start_row = random.randrange(board_size)
+                start_col = random.randrange(len(word) - 1, board_size)
             # NW
             else:
-                start_coords = generate_start_northwest(word)
+                start_row = random.randrange(len(word) - 1, board_size)
+                start_col = random.randrange(len(word) - 1, board_size)
 
+            start_coords = f'{start_row} {start_col}'
             success = find_space(word, int(start_coords.split()[0]),
                 int(start_coords.split()[1]), direction)
 
